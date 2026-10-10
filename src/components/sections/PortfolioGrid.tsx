@@ -1,6 +1,5 @@
 'use client';
 import { portfolio } from '@/lib/content';
-import { ArrowUpRight } from 'lucide-react';
 
 export default function PortfolioGrid() {
   return (
@@ -22,12 +21,12 @@ export default function PortfolioGrid() {
               
               {/* Left side: Client and Industry */}
               <div className="flex flex-col gap-2 md:w-1/3 mb-6 md:mb-0">
-                <div className="text-[10px] font-bold tracking-widest uppercase text-indigo-500 flex items-center gap-3">
+                <div className="text-[10px] font-bold tracking-widest uppercase text-[#0DAACC] flex items-center gap-3">
                   0{i + 1}
-                  <span className="w-8 h-px bg-indigo-500/30" />
+                  <span className="w-8 h-px bg-[#0DAACC]/30" />
                   {item.industry}
                 </div>
-                <h3 className="text-3xl md:text-4xl font-medium tracking-tighter text-white group-hover:text-indigo-300 transition-colors" style={{ fontFamily: 'var(--font-bricolage)' }}>
+                <h3 className="text-3xl md:text-4xl font-medium tracking-tighter text-white group-hover:text-[#5DD8EE] transition-colors" style={{ fontFamily: 'var(--font-bricolage)' }}>
                   {item.client}
                 </h3>
               </div>
@@ -39,13 +38,10 @@ export default function PortfolioGrid() {
                 </p>
               </div>
 
-              {/* Right: Service Tag & Icon */}
+              {/* Right: Service Tag */}
               <div className="flex items-center justify-between md:justify-end gap-8 md:w-1/4">
                 <div className="text-xs font-semibold uppercase tracking-widest text-zinc-300 border border-zinc-700 bg-zinc-900 rounded-full px-4 py-2">
                   {item.service}
-                </div>
-                <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-zinc-950 transition-colors">
-                  <ArrowUpRight size={20} />
                 </div>
               </div>
 

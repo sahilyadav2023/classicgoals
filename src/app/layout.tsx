@@ -49,6 +49,8 @@ export const viewport: Viewport = {
   ],
 }
 
+import RouteScrollReset from '@/components/RouteScrollReset'
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -56,7 +58,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${bricolage.variable} ${dmSans.variable}`}>
-      <body className="antialiased">
+      <body className="antialiased overflow-x-hidden w-full max-w-full">
+        <RouteScrollReset />
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

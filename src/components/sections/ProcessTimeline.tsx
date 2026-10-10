@@ -42,8 +42,8 @@ export default function ProcessTimeline() {
         <div className="flex flex-col gap-12 border-l border-white/10 pl-8 relative">
           {process.map((step, i) => (
              <div key={i} className="relative">
-                <div className="absolute -left-[41px] top-0 w-5 h-5 rounded-full bg-zinc-950 border-4 border-indigo-500" />
-                <div className="text-sm font-bold uppercase tracking-widest text-indigo-500 mb-2">{step.step}</div>
+                <div className="absolute -left-[41px] top-0 w-5 h-5 rounded-full bg-zinc-950 border-4 border-[#0DAACC]" />
+                <div className="text-sm font-bold uppercase tracking-widest text-[#0DAACC] mb-2">{step.step}</div>
                 <h3 className="text-3xl font-medium tracking-tighter mb-4" style={{ fontFamily: 'var(--font-bricolage)' }}>{step.title}</h3>
                 <p className="text-zinc-400 text-lg leading-relaxed">{step.desc}</p>
              </div>
@@ -61,7 +61,7 @@ export default function ProcessTimeline() {
         <div className="flex gap-24 items-center">
           {process.map((step, i) => (
             <div key={i} className="w-[400px] shrink-0 relative bg-zinc-900/50 border border-white/5 p-12 rounded-3xl">
-               <div className="text-sm font-bold uppercase tracking-widest text-indigo-500 mb-6">{step.step}</div>
+               <div className="text-sm font-bold uppercase tracking-widest text-[#0DAACC] mb-6">{step.step}</div>
                <h3 className="text-4xl font-medium tracking-tighter mb-6" style={{ fontFamily: 'var(--font-bricolage)' }}>{step.title}</h3>
                <p className="text-zinc-400 text-xl leading-relaxed">{step.desc}</p>
             </div>

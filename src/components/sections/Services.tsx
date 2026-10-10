@@ -1,122 +1,170 @@
 'use client';
 import { useRef } from 'react';
+import Link from 'next/link';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { services, pricing } from '@/lib/content';
+import { motion, useReducedMotion } from 'framer-motion';
+import { services } from '@/lib/content';
+import { ArrowUpRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const serviceAccents: Record<string, { label: string; bg: string; hex: string }> = {
+  website: { hex: '#1565C0', label: 'text-[#1565C0]', bg: 'bg-[#1565C0]/10' },
+  social:  { hex: '#00A651', label: 'text-[#00A651]', bg: 'bg-[#00A651]/10' },
+  seo:     { hex: '#0DAACC', label: 'text-[#0DAACC]', bg: 'bg-[#0DAACC]/10' },
+  ads:     { hex: '#F04E23', label: 'text-[#F04E23]', bg: 'bg-[#F04E23]/10' },
+};
+
+const serviceImages: Record<string, string> = {
+  website: '/images/service-website.jpg',
+  social:  '/images/service-social.jpg',
+  seo:     '/images/service-gmb.jpg',
+  ads:     '/images/service-website.jpg',
+};
+
 export default function Services() {
   const container = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion();
 
   useGSAP(() => {
-    let mm = gsap.matchMedia();
+    if (reduce) return;
+
+    const mm = gsap.matchMedia();
 
     mm.add('(min-width: 768px)', () => {
-      const cards = gsap.utils.toArray('.service-panel') as HTMLElement[];
-      
+      const cards = gsap.utils.toArray<HTMLElement>('.service-stack-card');
+
       cards.forEach((card, i) => {
-        gsap.to(card, {
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 15%',
-            endTrigger: '.services-end',
-            end: 'bottom top',
-            pin: true,
-            pinSpacing: false,
-          }
+        // Pin each card until the sentinel (.services-end) bottom leaves the viewport
+        ScrollTrigger.create({
+          trigger: card,
+          start: 'top 15%',
+          endTrigger: '.services-end',
+          end: 'bottom top',
+          pin: true,
+          pinSpacing: false,
         });
       });
     });
 
-  }, { scope: container });
+    return () => mm.revert();
+  }, { scope: container, dependencies: [reduce] });
 
   return (
-    <section ref={container} id="services" className="bg-zinc-100 text-zinc-950 py-24 relative z-20">
-      <div className="max-w-[1400px] mx-auto px-6 mb-24 text-center">
-        <h2 className="text-[clamp(3rem,6vw,6rem)] font-medium tracking-tighter leading-none" style={{ fontFamily: 'var(--font-bricolage)' }}>
+    <section ref={container} id="services" className="bg-zinc-100 text-zinc-950 relative z-20">
+      {/* Section header */}
+      <motion.div
+        className="max-w-[1400px] mx-auto px-6 pt-24 pb-16 text-center"
+        initial={reduce ? false : { opacity: 0, y: 32 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <h2
+          className="text-[clamp(3rem,6vw,6rem)] font-medium tracking-tighter leading-none"
+          style={{ fontFamily: 'var(--font-bricolage)' }}
+        >
           Everything You Need<br />to Grow Online.
         </h2>
-      </div>
+        <p className="text-zinc-500 text-xl mt-6 max-w-xl mx-auto leading-relaxed">
+          Four focused service areas. One agency. Your goals, our playbook.
+        </p>
+      </motion.div>
 
-      <div className="max-w-[1200px] mx-auto px-6 relative pb-[20vh] services-end">
-        {services.map((service, idx) => (
-          <div key={service.id} className={`service-panel w-full bg-white rounded-3xl p-8 md:p-16 shadow-2xl shadow-black/5 mb-8 md:mb-0 border border-zinc-200 relative`} style={{ zIndex: idx, top: `${idx * 20}px` }}>
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div>
-                <div className="text-sm font-bold uppercase tracking-widest text-indigo-600 mb-6">0{idx + 1}</div>
-                <h3 className="text-[clamp(2.5rem,4vw,4rem)] font-medium tracking-tighter leading-[1.1] mb-6" style={{ fontFamily: 'var(--font-bricolage)' }}>
-                  {service.title}
-                </h3>
-                <p className="text-zinc-500 text-lg md:text-xl mb-8 leading-relaxed">
-                  {service.shortDesc}
-                </p>
-                <ul className="grid grid-cols-2 gap-y-3 gap-x-6 text-sm font-medium text-zinc-700 mb-10">
-                  {service.features.map(feature => (
-                    <li key={feature} className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <a href="#contact" className="inline-flex bg-zinc-950 text-white px-8 py-4 rounded-full font-bold text-sm uppercase tracking-wide hover:bg-zinc-800 transition-colors" style={{ color: '#fff' }}>
-                  {service.cta}
-                </a>
-              </div>
-              
-              {/* Visual Demo Side */}
-              <div className="aspect-square md:aspect-auto md:h-full min-h-[400px] bg-zinc-50 rounded-2xl border border-zinc-100 p-8 flex flex-col justify-center relative overflow-hidden">
-                {service.id === 'website' && (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center">
-                    <div className="w-64 h-8 bg-zinc-200 rounded-full mb-4 animate-pulse" />
-                    <div className="w-full max-w-[80%] h-48 bg-white shadow-xl rounded-xl border border-zinc-100 flex p-4 gap-4">
-                      <div className="w-1/3 bg-zinc-100 rounded-lg" />
-                      <div className="w-2/3 flex flex-col gap-2">
-                         <div className="w-full h-4 bg-zinc-100 rounded-sm" />
-                         <div className="w-3/4 h-4 bg-zinc-100 rounded-sm" />
-                         <div className="w-1/2 h-4 bg-indigo-100 rounded-sm mt-auto" />
+      {/* Stack container — cards pin via GSAP; .services-end is the unpin sentinel */}
+      <div className="max-w-[1000px] mx-auto px-6 pb-16 md:pb-[30vh] services-end">
+        {services.map((service, idx) => {
+          const accent = serviceAccents[service.id] ?? serviceAccents.website;
+          return (
+            <div
+              key={service.id}
+              className="service-stack-card w-full bg-white rounded-3xl overflow-hidden shadow-2xl shadow-black/10 border border-zinc-200 mb-6 md:mb-0 will-change-transform md:sticky md:top-28"
+              style={{ zIndex: idx + 1 }}
+            >
+              <div className="grid md:grid-cols-2 min-h-[440px]">
+                {/* Left: content */}
+                <div className="flex flex-col justify-between p-8 md:p-12">
+                  <div>
+                    {/* Number + label */}
+                    <div className="flex items-center gap-3 mb-8">
+                      <div
+                        className={`w-9 h-9 rounded-full ${accent.bg} flex items-center justify-center`}
+                      >
+                        <span className={`text-xs font-bold ${accent.label}`}>0{idx + 1}</span>
                       </div>
+                      <span className={`text-xs font-bold uppercase tracking-widest ${accent.label}`}>
+                        {service.id === 'website' ? 'Web' : service.id === 'social' ? 'Social' : service.id === 'seo' ? 'Google Business & SEO' : 'Ads'}
+                      </span>
+                    </div>
+
+                    <h3
+                      className="text-[clamp(2rem,3.5vw,3.2rem)] font-medium tracking-tighter leading-[1.05] mb-5"
+                      style={{ fontFamily: 'var(--font-bricolage)' }}
+                    >
+                      {service.title}
+                    </h3>
+                    <p className="text-zinc-500 text-base md:text-lg leading-relaxed mb-8">
+                      {service.shortDesc}
+                    </p>
+
+                    {/* Feature pills */}
+                    <div className="flex flex-wrap gap-2 mb-10">
+                      {service.features.slice(0, 4).map(feat => (
+                        <span
+                          key={feat}
+                          className={`text-xs font-semibold px-3 py-1.5 rounded-full ${accent.bg} ${accent.label}`}
+                        >
+                          {feat}
+                        </span>
+                      ))}
+                      {service.features.length > 4 && (
+                        <span className="text-xs font-semibold px-3 py-1.5 rounded-full bg-zinc-100 text-zinc-500">
+                          +{service.features.length - 4} more
+                        </span>
+                      )}
                     </div>
                   </div>
-                )}
-                {service.id === 'social' && (
-                  <div className="absolute inset-0 flex items-center justify-center gap-4">
-                    <div className="w-32 h-48 bg-white shadow-lg rounded-xl border border-zinc-100 p-2 transform -rotate-6">
-                       <div className="w-full h-24 bg-zinc-100 rounded-lg mb-2" />
-                       <div className="w-3/4 h-2 bg-zinc-200 rounded-sm mb-1" />
-                       <div className="w-1/2 h-2 bg-zinc-200 rounded-sm" />
-                    </div>
-                    <div className="w-32 h-56 bg-white shadow-xl rounded-xl border border-zinc-100 p-2 z-10">
-                       <div className="w-full h-32 bg-indigo-500/10 rounded-lg mb-2 flex items-center justify-center">
-                         <div className="w-8 h-8 rounded-full bg-indigo-500/20" />
-                       </div>
-                       <div className="w-3/4 h-2 bg-zinc-200 rounded-sm mb-1" />
-                       <div className="w-full h-2 bg-zinc-100 rounded-sm" />
-                    </div>
-                  </div>
-                )}
-                {service.id === 'gmb' && (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center">
-                    <div className="w-full max-w-[80%] bg-white shadow-xl rounded-xl border border-zinc-100 p-4">
-                      <div className="flex gap-4 items-center mb-4 border-b border-zinc-100 pb-4">
-                        <div className="w-12 h-12 bg-indigo-500/10 rounded-full" />
-                        <div>
-                          <div className="w-32 h-4 bg-zinc-800 rounded-sm mb-2" />
-                          <div className="w-24 h-3 bg-zinc-200 rounded-sm" />
-                        </div>
-                      </div>
-                      <div className="flex gap-2">
-                        <div className="flex-1 h-8 bg-zinc-100 rounded-full" />
-                        <div className="flex-1 h-8 bg-indigo-500/10 text-indigo-600 flex items-center justify-center rounded-full text-[10px] font-bold">DIRECTIONS</div>
-                      </div>
-                    </div>
-                  </div>
-                )}
+
+                  {/* CTA */}
+                  <Link
+                    href={service.href}
+                    onClick={() => {
+                      if (typeof window !== 'undefined') {
+                        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+                        document.documentElement.scrollTop = 0;
+                        document.body.scrollTop = 0;
+                      }
+                    }}
+                    className="inline-flex self-start items-center gap-2 bg-zinc-950 text-white px-7 py-3.5 rounded-full font-bold text-sm uppercase tracking-wide hover:bg-zinc-800 transition-colors group/btn"
+                  >
+                    {service.cta}
+                    <ArrowUpRight
+                      size={15}
+                      className="transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+                    />
+                  </Link>
+                </div>
+
+                {/* Right: image */}
+                <div className="relative overflow-hidden min-h-[260px] md:min-h-0 rounded-b-3xl md:rounded-b-none md:rounded-r-3xl">
+                  <img
+                    src={serviceImages[service.id]}
+                    alt={service.title}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                  {/* Subtle accent tint */}
+                  <div
+                    className="absolute inset-0 opacity-20"
+                    style={{ background: `linear-gradient(135deg, ${accent.hex}80, transparent)` }}
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

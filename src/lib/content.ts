@@ -1,5 +1,5 @@
 export const site = {
-  name: 'Classic Goals',
+  name: 'Classic Goals Pvt Limited',
   tagline: 'Your Success Is Our Business.',
   phone: '9799881247',
   email: 'theclassicgoals00@gmail.com',
@@ -37,21 +37,32 @@ export const services = [
     title: 'WEBSITE DEVELOPMENT',
     shortDesc: 'Modern, responsive websites designed to establish your brand online and turn visitors into enquiries.',
     features: ['Static Websites', 'Dynamic Websites', 'Responsive Design', 'Business Websites', 'Custom Pages'],
-    cta: 'Explore Website Solutions',
+    cta: 'Explore Website',
+    href: '/services/website',
   },
   {
     id: 'social',
-    title: 'SOCIAL MEDIA & ADS',
-    shortDesc: 'Build a stronger social presence with consistent content, targeted campaigns and performance-focused advertising.',
-    features: ['Social Media Management', 'Content Creation', 'Facebook', 'Instagram', 'YouTube', 'Social Media Ads', 'Campaign Management', 'Performance Tracking'],
+    title: 'SOCIAL MEDIA',
+    shortDesc: 'Build a stronger social presence with consistent content, strategic scheduling and community management that keeps your brand relevant.',
+    features: ['Social Media Management', 'Content Creation', 'Facebook & Instagram', 'YouTube Management', 'Community Management', 'Performance Tracking'],
     cta: 'Explore Social Media',
+    href: '/services/social-media',
   },
   {
-    id: 'gmb',
-    title: 'GOOGLE BUSINESS & LOCAL SEO',
-    shortDesc: 'Improve your local online visibility and help customers discover your business through Google.',
+    id: 'seo',
+    title: 'GOOGLE BUSINESS & SEO',
+    shortDesc: 'Improve your search visibility and help customers discover your business on Google — locally and citywide.',
     features: ['Google Business Profile', 'Local SEO', 'Keyword Research', 'Competitor Research', 'GMB Posts', 'Citation Building', 'Review Management', 'Google Maps Visibility'],
-    cta: 'Explore Local SEO',
+    cta: 'Explore Google Business & SEO',
+    href: '/services/seo',
+  },
+  {
+    id: 'ads',
+    title: 'DIGITAL ADVERTISING',
+    shortDesc: 'Reach the right audience at the right moment with paid campaigns built for maximum return across websites, social media and Google.',
+    features: ['Website Ads', 'Social Media Ads', 'Google Ads', 'Campaign Strategy', 'Audience Targeting', 'Performance Reporting'],
+    cta: 'Explore Advertising',
+    href: '/services/ads',
   },
 ]
 
@@ -82,12 +93,13 @@ export const pricing = {
 }
 
 export const portfolio = [
-  { client: 'ASMEE IVF Centre', service: 'Google Business', industry: 'Healthcare', desc: 'Local search optimization and visibility.', type: 'seo' },
-  { client: 'Dr. Rahul Yadav', service: 'Dynamic Website', industry: 'Healthcare', desc: 'Modern medical practice website.', type: 'website' },
-  { client: 'Heart and General Hospital', service: 'Local SEO', industry: 'Healthcare', desc: 'Generating 1,360+ calls over 4 months.', type: 'seo' },
-  { client: 'Misura Luxury', service: 'Dynamic Website', industry: 'Luxury', desc: 'Premium e-commerce presence.', type: 'website' },
-  { client: 'Trinetra ENT Hospital', service: 'Static Website', industry: 'Healthcare', desc: 'Clean informational clinic site.', type: 'website' },
-  { client: 'Ramauro Gems', service: 'Dynamic Website', industry: 'Jewelry', desc: 'Elegant digital catalog.', type: 'website' },
+  { client: 'Dr. Dinesh Gora', service: 'Citywide SEO', industry: 'Healthcare', desc: 'City-level search dominance across Jaipur.', type: 'seo' },
+  { client: 'Dr. Sanvar MK', service: 'Local SEO', industry: 'Healthcare', desc: 'Local area visibility and patient acquisition.', type: 'seo' },
+  { client: 'CLR Eye Hospital', service: 'SMO + Local SEO', industry: 'Healthcare', desc: 'Social presence and local search optimization.', type: 'seo' },
+  { client: 'Sanjay Dental Clinic', service: 'SMO + Local SEO', industry: 'Dental', desc: 'Social media growth and local ranking.', type: 'seo' },
+  { client: 'Radhe Shri Dental Clinic', service: 'Local SEO', industry: 'Dental', desc: 'Improved Google Maps visibility and reach.', type: 'seo' },
+  { client: 'SK Dental Clinic', service: 'Local SEO', industry: 'Dental', desc: 'Local search presence and patient discovery.', type: 'seo' },
+  { client: 'Malpani Nursing Home', service: 'Local SEO', industry: 'Healthcare', desc: 'Enhanced local discoverability and enquiries.', type: 'seo' },
 ]
 
 export const testimonials = [

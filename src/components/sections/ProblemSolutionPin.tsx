@@ -15,7 +15,7 @@ export default function ProblemSolutionPin() {
       scrollTrigger: {
         trigger: container.current,
         start: 'top top',
-        end: '+=3000', // 3000px of scroll distance
+        end: () => (typeof window !== 'undefined' && window.innerWidth < 768 ? '+=1800' : '+=3000'),
         pin: true,
         scrub: 1,
       }
@@ -39,7 +39,7 @@ export default function ProblemSolutionPin() {
         The Reality
       </div>
       
-      <div ref={pinWrap} className="relative w-full max-w-4xl mx-auto text-center px-6">
+      <div ref={pinWrap} className="relative w-full max-w-4xl mx-auto text-center px-6 h-[400px] md:h-[480px]">
         <div className="problem-text absolute inset-0 flex flex-col items-center justify-center">
           <h2 className="text-[clamp(2.5rem,5vw,5rem)] font-medium leading-[0.9] tracking-tighter mb-6" style={{ fontFamily: 'var(--font-bricolage)' }}>
             Your Customers Are Searching.<br />Will They Find You?
@@ -52,29 +52,29 @@ export default function ProblemSolutionPin() {
         </div>
 
         <div className="solution-1 absolute inset-0 flex flex-col items-center justify-center opacity-0">
-          <div className="text-sm font-bold uppercase tracking-widest text-indigo-600 mb-4">Phase 1</div>
+          <div className="text-sm font-bold uppercase tracking-widest text-[#0e8ab4] mb-4">Phase 1</div>
           <h2 className="text-[clamp(3rem,6vw,6rem)] font-medium leading-none tracking-tighter" style={{ fontFamily: 'var(--font-bricolage)' }}>
             Strategy
           </h2>
         </div>
 
         <div className="solution-2 absolute inset-0 flex flex-col items-center justify-center opacity-0">
-          <div className="text-sm font-bold uppercase tracking-widest text-indigo-600 mb-4">Phase 2</div>
+          <div className="text-sm font-bold uppercase tracking-widest text-[#0e8ab4] mb-4">Phase 2</div>
           <h2 className="text-[clamp(3rem,6vw,6rem)] font-medium leading-none tracking-tighter" style={{ fontFamily: 'var(--font-bricolage)' }}>
             Execution
           </h2>
         </div>
 
         <div className="solution-3 absolute inset-0 flex flex-col items-center justify-center opacity-0">
-          <div className="text-sm font-bold uppercase tracking-widest text-indigo-600 mb-4">Phase 3</div>
+          <div className="text-sm font-bold uppercase tracking-widest text-[#0e8ab4] mb-4">Phase 3</div>
           <h2 className="text-[clamp(3rem,6vw,6rem)] font-medium leading-none tracking-tighter" style={{ fontFamily: 'var(--font-bricolage)' }}>
             Measurement
           </h2>
         </div>
 
         <div className="solution-4 absolute inset-0 flex flex-col items-center justify-center opacity-0">
-          <div className="text-sm font-bold uppercase tracking-widest text-indigo-600 mb-4">The Result</div>
-          <h2 className="text-[clamp(4rem,8vw,8rem)] font-medium leading-none tracking-tighter text-indigo-600" style={{ fontFamily: 'var(--font-bricolage)' }}>
+          <div className="text-sm font-bold uppercase tracking-widest text-[#0e8ab4] mb-4">The Result</div>
+          <h2 className="text-[clamp(4rem,8vw,8rem)] font-medium leading-none tracking-tighter text-[#0e8ab4]" style={{ fontFamily: 'var(--font-bricolage)' }}>
             Growth.
           </h2>
         </div>

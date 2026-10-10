@@ -16,15 +16,19 @@ export default function Pricing() {
         </p>
         
         {/* Billing Toggle for recurring plans */}
-        <div className="flex justify-center mb-16">
-          <div className="bg-zinc-200/50 p-1 rounded-full inline-flex">
+        <div className="flex justify-center mb-16 px-2">
+          <div className="bg-zinc-200/60 p-1 rounded-full inline-flex max-w-full overflow-x-auto scrollbar-none shadow-inner border border-zinc-200">
             {['monthly', 'quarterly', 'halfYearly', 'yearly'].map((period) => (
               <button
                 key={period}
                 onClick={() => setBilling(period as any)}
-                className={`px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-colors ${billing === period ? 'bg-zinc-950 text-white' : 'text-zinc-500 hover:text-zinc-950'}`}
+                className={`px-3.5 sm:px-6 py-2 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider sm:tracking-widest whitespace-nowrap transition-all ${
+                  billing === period
+                    ? 'bg-zinc-950 text-white shadow-md'
+                    : 'text-zinc-600 hover:text-zinc-950'
+                }`}
               >
-                {period.replace('Yearly', ' Yearly')}
+                {period === 'halfYearly' ? 'Half-Yearly' : period.replace('Yearly', ' Yearly')}
               </button>
             ))}
           </div>
@@ -34,7 +38,7 @@ export default function Pricing() {
           
           {/* Website Development */}
           <div className="bg-white p-10 rounded-3xl shadow-xl shadow-black/5 border border-zinc-100 flex flex-col">
-            <div className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-4">Website Development</div>
+            <div className="text-xs font-bold uppercase tracking-widest text-[#0e8ab4] mb-4">Website Development</div>
             <h3 className="text-4xl font-medium tracking-tight mb-8" style={{ fontFamily: 'var(--font-bricolage)' }}>One-Time</h3>
             <ul className="flex flex-col gap-4 text-zinc-600 mb-12 flex-1">
               <li className="flex justify-between items-end border-b border-zinc-100 pb-2">
@@ -57,7 +61,7 @@ export default function Pricing() {
 
           {/* Social Media & Ads */}
           <div className="bg-zinc-950 p-10 rounded-3xl shadow-xl shadow-black/10 border border-zinc-800 flex flex-col text-white transform md:-translate-y-4">
-            <div className="text-xs font-bold uppercase tracking-widest text-indigo-400 mb-4">Social Media & Ads</div>
+            <div className="text-xs font-bold uppercase tracking-widest text-[#0DAACC] mb-4">Social Media & Ads</div>
             <h3 className="text-5xl font-medium tracking-tight mb-8" style={{ fontFamily: 'var(--font-bricolage)' }}>
               ₹{pricing.social[billing]}
               <span className="text-base text-zinc-500 font-sans tracking-normal ml-2">/{billing.replace('Yearly', ' yr').replace('monthly', 'mo').replace('quarterly', 'qtr')}</span>
@@ -65,7 +69,7 @@ export default function Pricing() {
             <ul className="flex flex-col gap-4 text-zinc-300 mb-12 flex-1">
               {pricing.social.includes.map(item => (
                 <li key={item} className="flex items-center gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#0DAACC]" />
                   {item}
                 </li>
               ))}
@@ -77,7 +81,7 @@ export default function Pricing() {
 
           {/* Google Business / Local SEO */}
           <div className="bg-white p-10 rounded-3xl shadow-xl shadow-black/5 border border-zinc-100 flex flex-col">
-            <div className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-4">Google Business / Local SEO</div>
+            <div className="text-xs font-bold uppercase tracking-widest text-[#0e8ab4] mb-4">Google Business / Local SEO</div>
             <h3 className="text-4xl font-medium tracking-tight mb-8" style={{ fontFamily: 'var(--font-bricolage)' }}>Recurring</h3>
             <ul className="flex flex-col gap-4 text-zinc-600 mb-12 flex-1">
               <li className="flex justify-between items-end border-b border-zinc-100 pb-2">

@@ -9,6 +9,7 @@ import ProcessTimeline from '@/components/sections/ProcessTimeline';
 import PortfolioGrid from '@/components/sections/PortfolioGrid';
 import About from '@/components/sections/About';
 import Pricing from '@/components/sections/Pricing';
+import ContactForm from '@/components/ContactForm';
 import { testimonials, faqs, site } from '@/lib/content';
 
 export default function Home() {
@@ -18,11 +19,11 @@ export default function Home() {
       <main className="bg-zinc-950">
         <Hero />
         <TrustGrid />
+        <About />
         <ProblemSolutionPin />
         <Services />
         <ProcessTimeline />
         <PortfolioGrid />
-        <About />
         <Pricing />
 
         {/* Testimonials (Added as requested: Dummy realistic testimonials) */}
@@ -34,7 +35,7 @@ export default function Home() {
              <div className="grid md:grid-cols-3 gap-8">
                {testimonials.map((test, i) => (
                  <div key={i} className="bg-white p-10 rounded-3xl shadow-xl shadow-black/5 border border-zinc-100">
-                    <div className="text-4xl text-indigo-200 mb-6 font-serif">"</div>
+                    <div className="text-4xl text-[#0DAACC]/40 mb-6 font-serif">"</div>
                     <p className="text-zinc-600 text-lg leading-relaxed mb-8">{test.text}</p>
                     <div>
                       <div className="font-bold tracking-tight">{test.author}</div>
@@ -73,7 +74,7 @@ export default function Home() {
         {/* Contact Section */}
         <section id="contact" className="py-32 bg-zinc-950 text-white relative overflow-hidden">
           {/* subtle background glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-900/20 rounded-full blur-[100px] pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#1565C0]/20 rounded-full blur-[100px] pointer-events-none" />
           
           <div className="max-w-[1400px] mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-16">
             <div>
@@ -85,7 +86,7 @@ export default function Home() {
               </p>
               
               <div className="flex flex-col gap-6">
-                <a href={`tel:${site.phone}`} className="text-3xl font-medium tracking-tight hover:text-indigo-400 transition-colors">
+                <a href={`tel:${site.phone}`} className="text-3xl font-medium tracking-tight hover:text-[#0DAACC] transition-colors">
                   {site.phone}
                 </a>
                 <a href={`mailto:${site.email}`} className="text-xl text-zinc-400 hover:text-white transition-colors">
@@ -98,38 +99,7 @@ export default function Home() {
             </div>
 
             <div className="bg-zinc-900/50 border border-white/5 p-8 md:p-12 rounded-3xl backdrop-blur-xl">
-              <form className="flex flex-col gap-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="flex flex-col gap-2">
-                    <label className="text-xs font-bold uppercase tracking-widest text-zinc-500">Name</label>
-                    <input type="text" className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 transition-colors" />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <label className="text-xs font-bold uppercase tracking-widest text-zinc-500">Business</label>
-                    <input type="text" className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 transition-colors" />
-                  </div>
-                </div>
-                <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold uppercase tracking-widest text-zinc-500">Email</label>
-                  <input type="email" className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 transition-colors" />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold uppercase tracking-widest text-zinc-500">Service Required</label>
-                  <select className="bg-zinc-900 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 transition-colors appearance-none">
-                    <option>Website Development</option>
-                    <option>Social Media & Ads</option>
-                    <option>Google Business / Local SEO</option>
-                    <option>Multiple Services</option>
-                  </select>
-                </div>
-                <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold uppercase tracking-widest text-zinc-500">Message</label>
-                  <textarea rows={4} className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 transition-colors resize-none" />
-                </div>
-                <button type="submit" className="bg-white text-zinc-950 font-bold uppercase tracking-widest text-sm py-4 rounded-xl mt-4 hover:bg-zinc-200 transition-colors w-full" style={{ color: '#09090b' }}>
-                  Send Enquiry
-                </button>
-              </form>
+              <ContactForm />
             </div>
           </div>
         </section>
@@ -138,8 +108,8 @@ export default function Home() {
         <footer className="bg-zinc-950 text-white border-t border-white/10 pt-24 pb-12">
           <div className="max-w-[1400px] mx-auto px-6 grid md:grid-cols-4 gap-12 mb-24">
             <div className="md:col-span-2">
-              <div className="font-bold text-2xl tracking-tight leading-none uppercase mb-6" style={{ fontFamily: 'var(--font-bricolage)' }}>
-                CLASSIC<br />GOALS
+              <div className="font-bold text-2xl tracking-tight leading-tight uppercase mb-6" style={{ fontFamily: 'var(--font-bricolage)' }}>
+                CLASSIC GOALS<br />PVT LIMITED
               </div>
               <p className="text-zinc-500 max-w-sm">
                 {site.tagline}
@@ -157,14 +127,15 @@ export default function Home() {
             <div>
               <h4 className="font-bold uppercase tracking-widest text-xs text-zinc-500 mb-6">Services</h4>
               <ul className="flex flex-col gap-4 text-zinc-400">
-                <li><a href="#services" className="hover:text-white transition-colors">Website Development</a></li>
-                <li><a href="#services" className="hover:text-white transition-colors">Social Media & Ads</a></li>
-                <li><a href="#services" className="hover:text-white transition-colors">Google Business SEO</a></li>
+                <li><a href="/services/website" className="hover:text-white transition-colors">Website Development</a></li>
+                <li><a href="/services/social-media" className="hover:text-white transition-colors">Social Media</a></li>
+                <li><a href="/services/seo" className="hover:text-white transition-colors">SEO</a></li>
+                <li><a href="/services/ads" className="hover:text-white transition-colors">Digital Advertising</a></li>
               </ul>
             </div>
           </div>
           <div className="max-w-[1400px] mx-auto px-6 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-zinc-600 text-sm">
-            <div>© {new Date().getFullYear()} Classic Goals. All rights reserved.</div>
+            <div>© {new Date().getFullYear()} Classic Goals Pvt Limited. All rights reserved.</div>
             <div>Jaipur, Rajasthan</div>
           </div>
         </footer>
